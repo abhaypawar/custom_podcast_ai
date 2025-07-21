@@ -1,0 +1,21 @@
+# 1. Clone or navigate to your project folder
+cd ~/local/custom_podcast_ai
+
+# 2. Create virtual environment
+python3 -m venv venv
+source venv/bin/activate
+
+# 3. Install dependencies
+pip install -r requirements.txt
+
+# 4. Download model into models/model_name
+python -c "
+from transformers import AutoTokenizer, AutoModelForCausalLM
+AutoTokenizer.from_pretrained('TinyLlama/TinyLlama-1.1B-Chat-v1.0').save_pretrained('podcast_ai/models/model_name')
+AutoModelForCausalLM.from_pretrained('TinyLlama/TinyLlama-1.1B-Chat-v1.0').save_pretrained('podcast_ai/models/model_name')
+"
+
+# 5. Run podcast
+cd podcast_ai
+python main.py
+
